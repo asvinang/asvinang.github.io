@@ -71,3 +71,11 @@ minima:
   #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
 
 
+jekyll_admin:
+  hidden_links:
+    - posts
+    - pages
+    - staticfiles
+    - datafiles
+    - configuration
+  homepage: "pages"
