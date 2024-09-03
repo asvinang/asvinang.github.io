@@ -6,7 +6,7 @@ author:
 # The `>` after `description:` means to ignore line-breaks until next key.
 # If you want to omit the line-break after the end of text, use `>-` instead.
 description: >
-Excel, ChatGPT tips, programming for civil engineers
+  Excel, ChatGPT tips, programming for civil engineers
 
 # Build settings
 
@@ -69,7 +69,6 @@ minima:
   #  - { platform: twitter,        user_url: "https://twitter.com/jekyllrb" }
   #  - { platform: x,              user_url: "https://x.com/jekyllrb" }
   #  - { platform: youtube,        user_url: "https://www.youtube.com/jekyll" }
-
 
 jekyll_admin:
   hidden_links:
