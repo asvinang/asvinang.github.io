@@ -1,0 +1,36 @@
+% 4-project grid for short CV — 2 columns, no images, text-only cards
+\newcommand{\shortproject}[4]{%
+  \begin{minipage}[t]{0.46\textwidth}
+    \vspace{0pt}
+    {\small\textcolor{Primary2}{\textbf{#1}}}\\
+    {\color{Primary2}\rule{\linewidth}{0.4pt}}\\[1pt]
+    {\small\textcolor{Dark}{#2}}\\[2pt]
+    {\footnotesize\textcolor{Grey1}{#3}}\\[1pt]
+    {\footnotesize\textit{#4}}
+  \end{minipage}%
+}
+
+\vspace{2mm}
+\noindent
+\shortproject{Emerra.io — Geospatial Platform}%
+  {Browser-based infrastructure site suitability analysis: constraint scoring, weighted layers, automated red flag reports.}%
+  {React · FastAPI · GeoPandas · Firebase · Overpass API}%
+  {Personal · \href{https://emerra.io}{\hyperText{emerra.io}}}%
+\hfill
+\shortproject{Multi-Agent Market Entry Analyst}%
+  {Nine-agent AI pipeline producing branded DC market entry reports covering power, land, regulation, climate and competition.}%
+  {Claude API · Python · Multi-agent orchestration}%
+  {Personal project}%
+
+\vspace{4mm}
+\noindent
+\shortproject{PMO Intelligence Suite}%
+  {Smartsheet-to-Confluence automation: live data sync, AI-generated narrative reports, executive dashboards, access management.}%
+  {Smartsheet API · Python · Power Automate · Confluence}%
+  {Zerra DC}%
+\hfill
+\shortproject{Fatal Flaw Analysis Tool}%
+  {Automated QGIS site risk scoring across flood, seismic, aviation and topographic constraints — cut assessment time from 3 hours to 15 minutes.}%
+  {QGIS · Python · Spatial analysis}%
+  {Personal Project · Live demo available}%
+\vspace{2mm}

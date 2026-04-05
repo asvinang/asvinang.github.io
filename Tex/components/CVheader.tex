@@ -1,0 +1,58 @@
+%----------------------------------------------------------------------------------------
+%	ICON SETTINGS
+%----------------------------------------------------------------------------------------
+% load FontAwesome icons package
+\usepackage{fontawesome5} 
+% \icon 
+% 1: FontAwesome icon name
+% 2: box size 
+% 3: text
+\newcommand{\icon}[3]{
+	\vcenteredhbox{	
+	\colorbox
+		{white}
+		{\makebox(#2, #2)
+		{\textcolor{Secondary1}
+		{\large\csname fa#1\endcsname}}}}% Icon and box
+	\hspace{0.2cm}
+	\vcenteredhbox{\small\textcolor{black}{#3}}% Text
+}
+
+% CVheaderFull: adds GitHub, portfolio URL, languages subtitle
+% Args: #1 col1-width  #2 col2-width  #3 name  #4 title
+%       #5 email  #6 phone  #7 linkedin  #8 github-username  #9 iconsize
+\newcommand{\CVheaderFull}[9]{
+\begin{minipage}[c]{#1\textwidth}
+	\begin{flushleft}
+	{\HUGE\textcolor{Dark}{\textbf{\MakeUppercase{#3}}}}
+	\end{flushleft}
+	{\LARGE\textcolor{Primary2}{#4}}\\
+	\smallskip
+	{\small\textcolor{Grey1}{English (Native) \textbar{} Malay (Proficient) \textbar{} Mandarin (Intermediate, spoken)}}
+\end{minipage}\hfill
+\begin{minipage}[c]{#2\textwidth}
+	\icon{At}{#9}{\href{mailto:#5}{\hyperText{#5}}}\\
+	\icon{Linkedin}{#9}{\href{https://www.#7}{\hyperText{#7}}}\\
+	\icon{Github}{#9}{\href{https://github.com/#8}{\hyperText{github.com/#8}}}\\
+	\icon{Globe}{#9}{\href{https://#8.github.io}{\hyperText{#8.github.io}}}\\
+	\icon{Phone}{#9}{#6}\\
+\end{minipage}
+}
+
+\newcommand{\CVheader}[9]{
+\begin{minipage}[c]{#1\textwidth}
+	\begin{flushleft}
+	{\HUGE\textcolor{Dark}{\textbf{\MakeUppercase{#3}}}}
+	\end{flushleft}
+	{\LARGE\textcolor{Primary2}{#4} }\\
+\end{minipage}\hfill
+\begin{minipage}[c]{#2\textwidth}
+	\icon{At}{#9}{\href{mailto:#5}{\hyperText{#5}}}\\
+	\icon{Linkedin}{#9}{\href{https://www.#7}{\hyperText{#7}}}\\	
+	\icon{Phone}{#9}{#6}\\
+	\icon{MapMarker}{#9}{#8}\\	
+\end{minipage}
+}
+
+
+

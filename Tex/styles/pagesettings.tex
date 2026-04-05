@@ -1,0 +1,28 @@
+%----------------------------------------------------------------------------------------
+%	PAGE SIZE AND MARGIN SETTINGS - https://www.overleaf.com/learn/latex/
+%----------------------------------------------------------------------------------------
+\usepackage{geometry}
+ \geometry{
+ paper=a4paper,
+ left=15mm,
+ right=15mm,
+ top=20mm,
+ bottom=20mm,
+ headheight=10mm,
+ headsep=5mm,
+ }
+ 
+%----------------------------------------------------------------------------------------
+%	HEADER AND FOOTER SETTINGS
+%----------------------------------------------------------------------------------------
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+
+\rhead{{\textcolor{Grey2}{\textbf{\MakeUppercase{\doctitle}}}}}
+\rfoot{{\textcolor{Grey2}{\thepage}}}
+\lfoot{{\textcolor{white}{formatted with \LaTeX}}}
+\xpretocmd\headrule{\color{white}}{}{\PatchFailed}
+\renewcommand{\headrulewidth}{1pt}
+\xpretocmd\footrule{\color{Grey2}}{}{\PatchFailed}
+\renewcommand{\footrulewidth}{1pt}

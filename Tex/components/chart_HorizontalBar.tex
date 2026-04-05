@@ -1,0 +1,45 @@
+\newcounter{barcount}
+% Environment to hold a new bar chart
+\newenvironment{barchart}[3]{ 
+% #1 maximum bar width, in cm 
+% #2 Career Start Year
+% #3 Career End Year
+	\newcommand{\barwidth}{0.28}
+	\newcommand{\barsep}{0.28}
+	
+	% Command to add a bar to the bar chart
+	\newcommand{\baritem}[3]{ 
+	% ##1 bar label 
+	% ##2 start year
+	% ##3 end year
+	
+		\pgfmathparse{#1}
+		\let\barsize\pgfmathresult
+		
+		\pgfmathparse{int(#3-#2)}
+		\let\careerlength\pgfmathresult
+		
+		\pgfmathparse{int(##3-##2)}
+		\let\duration\pgfmathresult
+		
+		\pgfmathparse{\barsize*\duration/\careerlength}
+		\let\barlength\pgfmathresult
+		
+		\pgfmathparse{\barsize*(##2-#2)/\careerlength}
+		\let\barblank\pgfmathresult
+		
+		\pgfmathparse{(\barwidth*\thebarcount)+(\barsep*\thebarcount)}
+		\let\barx\pgfmathresult
+		
+		\filldraw[fill=Primary1, draw=none] (\barblank,-\barx) rectangle (\barblank+\barlength,-\barx-\barwidth);
+		
+		\node [label=180:\colorbox{white}{\small\textcolor{Secondary1}{##1}}] at (0,-\barx-0.175) {};
+		\node [label=180:\colorbox{white}{\textcolor{Secondary1}{\duration}}] at (\barsize+1,-\barx-0.175) {};
+
+		\addtocounter{barcount}{1}
+	}
+	\begin{tikzpicture}
+		\setcounter{barcount}{0}
+}{
+	\end{tikzpicture}
+}

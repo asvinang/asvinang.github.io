@@ -1,0 +1,45 @@
+% 2x3 competency grid — one box per domain
+% Each box: domain title + 3 sub-skills
+\newcommand{\compbox}[4]{%
+  \begin{minipage}[t]{0.3\textwidth}
+    \vspace{0pt}
+    \textcolor{Primary2}{\textbf{#1}}\\
+    {\color{Primary2}\rule{\linewidth}{0.4pt}}\\[1pt]
+    {\small\textcolor{Dark}{#2}\\[1pt] #3\\[1pt] #4}
+  \end{minipage}%
+}
+
+\vspace{2mm}
+\noindent
+\compbox{AI \& Intelligent Systems}%
+  {Multi-agent pipeline design}%
+  {LLM integration (Claude, OpenAI)}%
+  {Geospatial AI \& automated analysis}%
+\hfill
+\compbox{Digital Transformation}%
+  {Enterprise digitalisation strategy}%
+  {Legacy-to-cloud migration}%
+  {IoT, sensors \& smart infrastructure}%
+\hfill
+\compbox{Programme \& PMO Leadership}%
+  {End-to-end programme architecture}%
+  {Executive reporting \& governance}%
+  {Cross-functional team leadership}%
+
+\vspace{4mm}
+\noindent
+\compbox{Infrastructure Development}%
+  {Data centre pre-development (APAC)}%
+  {Industrial park masterplanning}%
+  {Site selection \& technical due diligence}%
+\hfill
+\compbox{Geospatial \& Data Platforms}%
+  {Full-stack geospatial web apps}%
+  {QGIS automation \& spatial analysis}%
+  {Open data pipelines (OSM, government)}%
+\hfill
+\compbox{Engineering Leadership}%
+  {Civil, transport \& hydraulic design}%
+  {Procurement \& contract management}%
+  {Multi-disciplinary technical oversight}%
+\vspace{2mm}

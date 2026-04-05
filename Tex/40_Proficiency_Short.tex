@@ -1,0 +1,44 @@
+% Compact 4-column technology grid for short CV
+\newcommand{\techcol}[2]{%
+  \begin{minipage}[t]{0.22\textwidth}
+    \vspace{0pt}
+    {\small\textcolor{Primary2}{\textbf{#1}}}\\
+    {\color{Primary2}\rule{\linewidth}{0.4pt}}\\[2pt]
+    {\footnotesize #2}
+  \end{minipage}%
+}
+
+\vspace{2mm}
+\noindent
+\techcol{AI \& LLMs}{%
+  Claude API\\
+  OpenAI API\\
+  Multi-agent design\\
+  LLM prompt engineering\\
+  Agent SDK
+}%
+\hfill
+\techcol{Geospatial \& Data}{%
+  QGIS · ArcGIS\\
+  GeoPandas · Shapely\\
+  Overpass API\\
+  FastAPI\\
+  Firebase / Firestore
+}%
+\hfill
+\techcol{Development}{%
+  Python\\
+  React\\
+  Google Cloud Run\\
+  GitHub Pages\\
+  Flutter / Android Studio
+}%
+\hfill
+\techcol{PMO \& Workflow}{%
+  Smartsheet API\\
+  Confluence\\
+  Power Automate\\
+  Microsoft Project\\
+  \LaTeX{} typesetting
+}%
+\vspace{2mm}

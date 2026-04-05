@@ -1,0 +1,77 @@
+%----------------------------------------------------------------------------------------
+%	CV SHORT FORM — 2 pages
+%   Target: CIO / Chief AI Officer screen
+%----------------------------------------------------------------------------------------
+\documentclass[10pt]{class/Template_CV}
+
+\title{Asvin Ang — CV}
+\date{\today}
+\author{Asvin Ang}
+
+\newcommand{\myname}{Asvin Ang}
+\newcommand{\mycolumnone}{0.65}
+\newcommand{\mycolumntwo}{0.3}
+\newcommand{\doctitle}{Asvin Ang — CV}
+\newcommand{\docdate}{\today}
+
+\setcolors{Brown}{DeepOrange}
+\choosefont{roboto}
+
+%----------------------------------------------------------------------------------------
+\begin{document}
+%----------------------------------------------------------------------------------------
+
+% ── HEADER ───────────────────────────────────────────────────────────────────
+\CVheaderFull{0.575}{0.375}
+  {Asvin Ang Chit Sik}
+  {PMO Director · Project Management · Strategy · Digital Infrastructure · AI · Digital Transformation}
+  { }
+  { }
+  {linkedin.com/in/asvinang}
+  {asvinang}
+  {9}
+\par\vspace{2mm}
+
+% ── EXECUTIVE SUMMARY ────────────────────────────────────────────────────────
+\cvsect{1}{Executive Summary}
+{\input{02_ExecutiveSummary.tex}}
+
+\medskip
+% ── COMPETENCY GRID ──────────────────────────────────────────────────────────
+\cvsect{1}{Core Competencies}
+{\input{03_CompetencyGrid.tex}}
+
+\medskip
+% ── WORK EXPERIENCE ──────────────────────────────────────────────────────────
+\SectionHeading{Work Experience}
+\vspace*{1mm}
+{\color{Primary2}\hrule}
+\vspace*{2mm}
+\begin{addmargin}[2mm]{2mm}
+\input{10_Experience_Short.tex}
+\end{addmargin}
+
+%----------------------------------------------------------------------------------------
+\newpage
+%----------------------------------------------------------------------------------------
+
+% ── SELECTED PROJECTS ────────────────────────────────────────────────────────
+\cvsect{1}{Selected Projects}
+{\input{20_Projects_Short.tex}}
+
+\medskip
+% ── TECHNOLOGIES ─────────────────────────────────────────────────────────────
+\cvsect{1}{Technologies \& Tools}
+{\input{40_Proficiency_Short.tex}}
+
+\medskip
+% ── EDUCATION ────────────────────────────────────────────────────────────────
+\cvsect{1}{Education, Certifications \& Memberships}
+{\input{50_Education.tex}}
+
+\medskip
+{\footnotesize\textcolor{Grey1}{\centering References available upon request. Extended CV and project portfolio at \href{https://asvinang.github.io}{\hyperText{asvinang.github.io}}}}
+
+%----------------------------------------------------------------------------------------
+\end{document}
+%----------------------------------------------------------------------------------------

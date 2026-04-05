@@ -1,0 +1,23 @@
+\newcounter{a}
+\newcounter{b}
+\newcounter{c}
+
+% Command to output a number of automatically-sized bubbles from a string in the format of '<size>/<label>', e.g. \bubbles{5/Eclipse, 6/git, 4/Office, 3/Inkscape, 3/Blender}
+\newcommand{\bubbles}[1]{
+	% Reset counters
+	\setcounter{a}{0}
+	\setcounter{c}{150}
+	
+	\begin{tikzpicture}[scale=3]
+		\foreach \p/\t in {#1} {
+			\addtocounter{a}{1}
+			\bubble{\thea/2}{\theb}{\p/25}{\t}{1\p0}
+		}
+	\end{tikzpicture}
+}
+
+% Command to output a bubble at a specific position with a specific size
+\newcommand{\bubble}[5]{
+	\filldraw[fill=black, draw=none] (#1,0.5) circle (#3); % Bubble
+	\node[label=\textcolor{black}{#4}] at (#1,0.7) {}; % Label
+}
