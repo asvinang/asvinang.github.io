@@ -1,0 +1,15 @@
+# LaTeX build artefacts
+Tex/*.aux
+Tex/*.log
+Tex/*.out
+Tex/*.synctex.gz
+Tex/*.fls
+Tex/*.fdb_latexmk
+Tex/*.toc
+Tex/*.lof
+Tex/*.lot
+Tex/*.bbl
+Tex/*.blg
+
+# Dated CV outputs (fixed-name PDFs are kept for the website)
+Tex/CV/Asvin_Ang_CV_*_20*.pdf

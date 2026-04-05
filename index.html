@@ -76,7 +76,7 @@
     text-decoration: none;
     letter-spacing: -0.3px;
   }
-  .nav-links { display: flex; gap: 28px; }
+  .nav-links { display: flex; gap: 24px; }
   .nav-links a {
     font-size: 13px;
     font-weight: 500;
@@ -405,6 +405,41 @@
     color: var(--ink-faint);
   }
 
+  /* ── CV ──────────────────────────────────────── */
+  .cv-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  .cv-card {
+    background: var(--card-bg);
+    border: 1px solid var(--rule-light);
+    border-radius: 10px;
+    padding: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+  .cv-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--accent);
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+  .cv-card:hover { box-shadow: var(--card-shadow); border-color: var(--rule); transform: translateY(-2px); }
+  .cv-card:hover::before { opacity: 1; }
+  .cv-card-label { font-family: var(--mono); font-size: 10px; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 1.2px; }
+  .cv-card-title { font-family: var(--serif); font-size: 22px; color: var(--ink); letter-spacing: -0.3px; }
+  .cv-card-desc { font-size: 13.5px; color: var(--ink-mid); line-height: 1.65; flex: 1; }
+  .cv-card-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px; }
+  @media (max-width: 600px) { .cv-grid { grid-template-columns: 1fr; } }
+
   /* ── CONTACT ─────────────────────────────────── */
   .contact-section {
     text-align: center;
@@ -487,6 +522,7 @@
     <a href="#" class="nav-name">Asvin Ang</a>
     <div class="nav-links">
       <a href="#projects">Projects</a>
+      <a href="#cv">CV</a>
       <a href="#about">About</a>
       <a href="#toolbox">Stack</a>
       <a href="#contact">Contact</a>
@@ -644,6 +680,39 @@
   </div>
 </section>
 
+<!-- ── CV ───────────────────────────────────────── -->
+<section id="cv">
+  <div class="container">
+    <div class="section-label">CV</div>
+    <div class="section-title">Curriculum Vitae</div>
+    <p class="section-desc">Two formats depending on context — a concise screen for quick review, and a full version for board or shortlist packs.</p>
+
+    <div class="cv-grid reveal">
+
+      <div class="cv-card">
+        <div class="cv-card-label">2 pages · Screen</div>
+        <div class="cv-card-title">Short CV</div>
+        <p class="cv-card-desc">Executive summary, core competencies, condensed work history, selected projects, technologies and education. Optimised for first-pass screening.</p>
+        <div class="cv-card-actions">
+          <a href="Tex/CV/Asvin_Ang_CV_Short.pdf" target="_blank" class="btn btn-primary">View PDF →</a>
+          <a href="Tex/CV/Asvin_Ang_CV_Short.pdf" download class="btn btn-secondary">Download</a>
+        </div>
+      </div>
+
+      <div class="cv-card">
+        <div class="cv-card-label">6 pages · Full</div>
+        <div class="cv-card-title">Extended CV</div>
+        <p class="cv-card-desc">Full work history with roles, responsibilities and achievements, project portfolio with images, software proficiency matrix and complete education record.</p>
+        <div class="cv-card-actions">
+          <a href="Tex/CV/Asvin_Ang_CV_Extended.pdf" target="_blank" class="btn btn-primary">View PDF →</a>
+          <a href="Tex/CV/Asvin_Ang_CV_Extended.pdf" download class="btn btn-secondary">Download</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ── ABOUT ────────────────────────────────────── -->
 <section id="about" style="background: var(--bg-warm);">
   <div class="container">
@@ -653,8 +722,8 @@
     <div class="about-content">
       <div class="about-text reveal">
         <p>
-          <strong>Civil engineer by training.</strong> I started in civil engineering, 
-          moved into real estate development, and now lead PMO operations for a data centre company in Singapore.
+          <strong>Civil engineer by training.</strong> I started in civil engineering,
+          moved into real estate development, and now serve as PMO Director at Zerra DC in Singapore.
         </p>
         <p>
           The thread across all of it: I build systems that give people clarity — whether that's a 
@@ -670,19 +739,19 @@
 
       <div class="trajectory reveal">
         <div class="traj-item">
-          <div class="traj-period">Current</div>
-          <div class="traj-role">PMO Lead & Strategic Integrator</div>
-          <div class="traj-org">Data Centre Development · Singapore</div>
+          <div class="traj-period">Mar 2025 – Present</div>
+          <div class="traj-role">PMO Director</div>
+          <div class="traj-org">Zerra DC · Singapore</div>
         </div>
         <div class="traj-item">
-          <div class="traj-period">Previous</div>
-          <div class="traj-role">Real Estate Development</div>
-          <div class="traj-org">Project Management & Feasibility</div>
+          <div class="traj-period">Apr 2023 – Mar 2025</div>
+          <div class="traj-role">Senior Program Manager</div>
+          <div class="traj-org">AirTrunk (Blackstone) · 4 DC projects delivered</div>
         </div>
         <div class="traj-item">
           <div class="traj-period">Earlier</div>
-          <div class="traj-role">Civil Engineering</div>
-          <div class="traj-org">Infrastructure Engineering & Design</div>
+          <div class="traj-role">Civil Engineering & Real Estate Development</div>
+          <div class="traj-org">Sembcorp · Yondr · Surbana · Halcrow</div>
         </div>
         <div class="traj-item">
           <div class="traj-period">Foundation</div>

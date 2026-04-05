@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pdflatex -interaction=nonstopmode CV_Extended.tex)",
+      "Bash(pdflatex -interaction=nonstopmode CV_Short.tex)",
+      "Bash(python compile_cv.py)"
+    ]
+  }
+}
