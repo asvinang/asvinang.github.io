@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Piano Quest</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body, #root { width: 100%; height: 100%; overflow: hidden; }
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body>
+  <div id="root"></div>
+  <!-- Config data (plain JS, no JSX needed) -->
+  <script src="config.js"></script>
+  <!-- Enemy sprites (JSX) -->
+  <script type="text/babel" src="sprites.jsx"></script>
+  <!-- Components + App (JSX, includes mount) -->
+  <script type="text/babel" src="piano-quest.jsx"></script>
+</body>
+</html>
