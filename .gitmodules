@@ -1,6 +1,0 @@
-[submodule "Tex"]
-	path = Tex
-	url = https://github.com/asvinang/cv-maker
-[submodule "cv-maker"]
-	path = cv-maker
-	url = https://github.com/asvinang/cv-maker
