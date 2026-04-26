@@ -1047,17 +1047,17 @@
 </footer>
 
 <!-- ── MODAL ───────────────────────────────────── -->
-<div id="project-modal" style="display:none;">
+<div id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" style="display:none;">
     <div class="modal-overlay"></div>
     <div class="modal-content">
-        <button class="modal-close">×</button>
+        <button class="modal-close" aria-label="Close modal">×</button>
         <div class="modal-grid">
             <div class="modal-visual">
                 <div class="modal-image-placeholder"></div>
             </div>
             <div class="modal-info">
                 <div class="modal-label"></div>
-                <h2 class="modal-title"></h2>
+                <h2 class="modal-title" id="modal-title"></h2>
                 <div class="modal-tech-tags"></div>
                 <p class="modal-description"></p>
                 <div class="modal-actions"></div>
@@ -1073,6 +1073,7 @@
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
       }
     });
   }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
@@ -1081,6 +1082,8 @@
 
   // Project Modal Logic (FLIP)
   const modal = document.getElementById('project-modal');
+  let lastFocusedElement = null;
+
   if (modal) {
     const modalContent = modal.querySelector('.modal-content');
     const modalOverlay = modal.querySelector('.modal-overlay');
@@ -1092,6 +1095,7 @@
     const modalActions = modal.querySelector('.modal-actions');
 
     const openModal = (card) => {
+      lastFocusedElement = card;
       const first = card.getBoundingClientRect();
 
       // Populate data from attributes
@@ -1159,6 +1163,7 @@
         modalContent.style.transform = '';
         modalOverlay.style.transition = '';
         modalOverlay.style.opacity = '';
+        modalClose.focus();
       });
 
       document.body.style.overflow = 'hidden';
@@ -1171,6 +1176,7 @@
         if (!modal.classList.contains('active')) {
           modal.style.display = 'none';
           modalContent.style.transform = ''; // Reset
+          if (lastFocusedElement) lastFocusedElement.focus();
         }
       }, 400);
     };
@@ -1184,12 +1190,20 @@
         }
         openModal(card);
       });
+      // Make cards focusable for keyboard navigation
+      card.setAttribute('tabindex', '0');
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openModal(card);
+        }
+      });
     });
 
     modalClose.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', closeModal);
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeModal();
+      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
     });
   }
 </script>
