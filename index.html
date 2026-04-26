@@ -1066,8 +1066,9 @@
     </div>
 </div>
 
-<!-- ── SCROLL REVEAL ───────────────────────────── -->
+<!-- ── SCRIPTS ─────────────────────────────────── -->
 <script>
+  // Scroll Reveal Observer
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -1078,8 +1079,119 @@
 
   document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-  // Timestamp
-  document.getElementById('ts');
+  // Project Modal Logic (FLIP)
+  const modal = document.getElementById('project-modal');
+  if (modal) {
+    const modalContent = modal.querySelector('.modal-content');
+    const modalOverlay = modal.querySelector('.modal-overlay');
+    const modalClose = modal.querySelector('.modal-close');
+    const modalLabel = modal.querySelector('.modal-label');
+    const modalTitle = modal.querySelector('.modal-title');
+    const modalTechTags = modal.querySelector('.modal-tech-tags');
+    const modalDescription = modal.querySelector('.modal-description');
+    const modalActions = modal.querySelector('.modal-actions');
+
+    const openModal = (card) => {
+      const first = card.getBoundingClientRect();
+
+      // Populate data from attributes
+      modalLabel.textContent = card.dataset.category || '';
+      modalTitle.textContent = card.dataset.title || '';
+      modalDescription.textContent = card.dataset.details || '';
+
+      // Tech tags
+      modalTechTags.innerHTML = '';
+      try {
+        const tech = JSON.parse(card.dataset.tech || '[]');
+        tech.forEach(t => {
+          const span = document.createElement('span');
+          span.className = 'tag';
+          span.textContent = t;
+          modalTechTags.appendChild(span);
+        });
+      } catch (e) { console.error('Error parsing tech tags', e); }
+
+      // Actions
+      modalActions.innerHTML = '';
+      try {
+        const links = JSON.parse(card.dataset.links || '{}');
+        if (links.live && links.live !== '#') {
+          const a = document.createElement('a');
+          a.href = links.live;
+          a.target = '_blank';
+          a.className = 'btn btn-primary';
+          a.innerHTML = 'View Live <span style="margin-left:4px">→</span>';
+          modalActions.appendChild(a);
+        }
+        if (links.source && links.source !== '#') {
+          const a = document.createElement('a');
+          a.href = links.source;
+          a.target = '_blank';
+          a.className = 'btn btn-secondary';
+          a.innerHTML = 'Source Code';
+          modalActions.appendChild(a);
+        }
+      } catch (e) { console.error('Error parsing links', e); }
+
+      // FLIP Animation
+      modal.style.display = 'flex';
+      const last = modalContent.getBoundingClientRect();
+
+      // Invert
+      const deltaX = first.left - last.left;
+      const deltaY = first.top - last.top;
+      const deltaW = first.width / last.width;
+      const deltaH = first.height / last.height;
+
+      modalContent.style.transition = 'none';
+      modalContent.style.transformOrigin = 'top left';
+      modalContent.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(${deltaW}, ${deltaH})`;
+      modalOverlay.style.transition = 'none';
+      modalOverlay.style.opacity = '0';
+
+      // Force reflow
+      modalContent.offsetHeight;
+
+      // Play
+      requestAnimationFrame(() => {
+        modal.classList.add('active');
+        modalContent.style.transition = ''; 
+        modalContent.style.transform = '';
+        modalOverlay.style.transition = '';
+        modalOverlay.style.opacity = '';
+      });
+
+      document.body.style.overflow = 'hidden';
+    };
+
+    const closeModal = () => {
+      modal.classList.remove('active');
+      document.body.style.overflow = '';
+      setTimeout(() => {
+        if (!modal.classList.contains('active')) {
+          modal.style.display = 'none';
+          modalContent.style.transform = ''; // Reset
+        }
+      }, 400);
+    };
+
+    document.querySelectorAll('.project-card').forEach(card => {
+      card.addEventListener('click', (e) => {
+        // Prevent navigation if the card is wrapped in a link
+        const link = card.closest('a');
+        if (link) {
+          e.preventDefault();
+        }
+        openModal(card);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', closeModal);
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeModal();
+    });
+  }
 </script>
 
 </body>
