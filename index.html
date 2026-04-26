@@ -27,8 +27,17 @@
   </div>
 </nav>
 
+<!-- Floating Dot Navigation -->
+<div class="dot-nav">
+  <a href="#home" class="dot" aria-label="Home" data-target="home"></a>
+  <a href="#projects" class="dot" aria-label="Projects" data-target="projects"></a>
+  <a href="#about" class="dot" aria-label="About" data-target="about"></a>
+  <a href="#toolbox" class="dot" aria-label="Stack" data-target="toolbox"></a>
+  <a href="#contact" class="dot" aria-label="Contact" data-target="contact"></a>
+</div>
+
 <!-- ── HERO ─────────────────────────────────────── -->
-<div class="hero">
+<div id="home" class="hero">
   <div class="container">
     <div class="hero-label">Infrastructure × Intelligence × Automation</div>
     <h1>I build tools that make <em>infrastructure development</em> faster and smarter.</h1>
@@ -400,6 +409,28 @@
 
   // Initialize Lucide Icons
   lucide.createIcons();
+
+  // Floating Dot Navigation Observer
+  const sections = document.querySelectorAll('div.hero, section');
+  const navDots = document.querySelectorAll('.dot-nav .dot');
+
+  const dotObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.getAttribute('id');
+        navDots.forEach(dot => {
+          dot.classList.remove('active');
+          if (dot.getAttribute('data-target') === id) {
+            dot.classList.add('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.3, rootMargin: '-10% 0px -40% 0px' });
+
+  sections.forEach(section => {
+    dotObserver.observe(section);
+  });
 
   // Project Modal Logic (FLIP)
   const modal = document.getElementById('project-modal');
