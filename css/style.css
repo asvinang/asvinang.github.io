@@ -359,7 +359,19 @@ section + section { border-top: 1px solid var(--rule-light); }
   border-color: var(--accent);
   transform: translateY(-1px);
 }
-.tool-icon { font-size: 24px; margin-bottom: 8px; }
+.tool-icon { 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 32px;
+  margin-bottom: 12px;
+  color: var(--accent);
+}
+.tool-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.5px;
+}
 .tool-name {
   font-size: 12px;
   font-weight: 600;
