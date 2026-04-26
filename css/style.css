@@ -209,7 +209,14 @@ section + section { border-top: 1px solid var(--rule-light); }
 .project-card:not([data-links*='"live": "#"']):not([data-links*='"live": ""']) {
   position: relative;
   background: var(--card-bg);
-  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0% { border-color: rgba(230, 74, 25, 0.15); box-shadow: 0 0 15px rgba(230, 74, 25, 0.03); }
+  50% { border-color: rgba(230, 74, 25, 0.35); box-shadow: 0 0 25px rgba(230, 74, 25, 0.08); }
+  100% { border-color: rgba(230, 74, 25, 0.15); box-shadow: 0 0 15px rgba(230, 74, 25, 0.03); }
 }
 
 .project-card:not([data-links*='"live": "#"']):not([data-links*='"live": ""']) .glow-overlay {
@@ -304,10 +311,35 @@ section + section { border-top: 1px solid var(--rule-light); }
 }
 .brand-text span {
   font-family: var(--brand);
-  color: var(--accent);
+  color: #2c5f4a; /* Emerra Green */
   letter-spacing: 1px;
   margin-left: 3px;
   font-weight: 400;
+}
+
+.project-image {
+  width: calc(100% + 56px);
+  margin: -28px -28px 24px -28px;
+  height: 180px;
+  background-color: var(--bg-warm);
+  border-bottom: 1px solid var(--rule-light);
+  position: relative;
+  overflow: hidden;
+}
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.project-card:hover .project-image img {
+  transform: scale(1.05);
+}
+.project-image.pattern-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.6;
 }
 
 /* ── ABOUT ───────────────────────────────────── */
