@@ -207,8 +207,11 @@ section + section { border-top: 1px solid var(--rule-light); }
 }
 /* Slight glow for cards with links */
 .project-card[data-links*="http"]:not([data-links*='"live": "#"']):not([data-links*='"live": ""']) {
-  box-shadow: 0 0 15px rgba(44, 95, 74, 0.05);
-  border-color: rgba(44, 95, 74, 0.15);
+  box-shadow: 0 0 20px rgba(230, 74, 25, 0.12);
+  border-color: rgba(230, 74, 25, 0.25);
+}
+.project-card:hover[data-links*="http"]:not([data-links*='"live": "#"']):not([data-links*='"live": ""']) {
+  box-shadow: 0 8px 30px rgba(230, 74, 25, 0.18);
 }
 .project-card::before {
   content: '';
@@ -394,31 +397,51 @@ section + section { border-top: 1px solid var(--rule-light); }
 /* ── CONTACT ─────────────────────────────────── */
 .contact-section {
   text-align: center;
-  padding: 80px 0;
+  padding: 100px 0;
 }
-.contact-links {
-  display: flex;
-  justify-content: center;
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 20px;
-  margin-top: 28px;
+  margin-top: 48px;
 }
-.contact-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  border: 1px solid var(--rule);
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--ink-mid);
+.contact-card {
+  background: var(--card-bg);
+  border: 1px solid var(--rule-light);
+  border-radius: 10px;
+  padding: 24px;
   text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
   transition: all 0.2s;
+  color: var(--ink-mid);
 }
-.contact-link:hover {
+.contact-card:hover {
   border-color: var(--accent);
+  box-shadow: var(--card-shadow);
+  transform: translateY(-2px);
   color: var(--accent);
-  transform: translateY(-1px);
+}
+.contact-icon {
+  color: var(--accent);
+}
+.contact-icon svg {
+  width: 24px;
+  height: 24px;
+  stroke-width: 1.5px;
+}
+.contact-label {
+  font-family: var(--mono);
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--ink-faint);
+}
+.contact-value {
+  font-size: 14px;
+  font-weight: 500;
 }
 
 /* ── FOOTER ──────────────────────────────────── */

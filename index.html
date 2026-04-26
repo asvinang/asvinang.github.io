@@ -341,26 +341,44 @@
 </section>
 
 <!-- ── CONTACT ──────────────────────────────────── -->
-<section id="contact" class="contact-section" style="background: var(--bg-warm);">
+<section id="contact" style="background: var(--bg-warm);">
   <div class="container">
     <div class="section-label">Contact</div>
     <div class="section-title">Get in Touch</div>
-    <p style="color: var(--ink-mid); max-width: 420px; margin: 0 auto;">
+    <p class="section-desc">
       Open to conversations about infrastructure intelligence, 
       data centre development, and building tools that solve real problems.
     </p>
-    <div class="contact-links">
-      <a href="https://github.com/asvinang" target="_blank" class="contact-link">
-        <i data-lucide="github" style="width: 16px; height: 16px;"></i>
-        GitHub
+    
+    <div class="contact-grid reveal">
+      <a href="mailto:asvin.ang@gmail.com" class="contact-card">
+        <div class="contact-icon"><i data-lucide="mail"></i></div>
+        <div class="contact-label">Email</div>
+        <div class="contact-value">asvin.ang@gmail.com</div>
       </a>
-      <a href="https://linkedin.com/in/asvinang" target="_blank" class="contact-link">
-        <i data-lucide="linkedin" style="width: 16px; height: 16px;"></i>
-        LinkedIn
+      
+      <a href="#" id="mobile-link" class="contact-card">
+        <div class="contact-icon"><i data-lucide="phone"></i></div>
+        <div class="contact-label">Mobile</div>
+        <div class="contact-value" id="mobile-value">Click to reveal</div>
       </a>
-      <a href="https://emerra.io" target="_blank" class="contact-link">
-        <i data-lucide="globe" style="width: 16px; height: 16px;"></i>
-        Emerra.io
+
+      <a href="https://linkedin.com/in/asvinang" target="_blank" class="contact-card">
+        <div class="contact-icon"><i data-lucide="linkedin"></i></div>
+        <div class="contact-label">Professional</div>
+        <div class="contact-value">linkedin.com/in/asvinang</div>
+      </a>
+
+      <a href="https://github.com/asvinang" target="_blank" class="contact-card">
+        <div class="contact-icon"><i data-lucide="github"></i></div>
+        <div class="contact-label">Source Code</div>
+        <div class="contact-value">github.com/asvinang</div>
+      </a>
+
+      <a href="https://emerra.io" target="_blank" class="contact-card">
+        <div class="contact-icon"><i data-lucide="globe"></i></div>
+        <div class="contact-label">Company</div>
+        <div class="contact-value">emerra.io</div>
       </a>
     </div>
   </div>
@@ -409,6 +427,22 @@
 
   // Initialize Lucide Icons
   lucide.createIcons();
+
+  // Mobile Reveal Logic (Anti-Spam)
+  const mobileLink = document.getElementById('mobile-link');
+  const mobileValue = document.getElementById('mobile-value');
+  const part1 = '+65';
+  const part2 = ' 8894';
+  const part3 = ' 5352';
+
+  if (mobileLink) {
+    mobileLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const fullNumber = part1 + part2 + part3;
+      mobileValue.textContent = fullNumber;
+      mobileLink.href = 'tel:' + fullNumber.replace(/\s/g, '');
+    });
+  }
 
   // Floating Dot Navigation Observer
   const sections = document.querySelectorAll('div.hero, section');
