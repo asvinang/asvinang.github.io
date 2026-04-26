@@ -559,7 +559,13 @@
 
       <!-- FEATURED: Emerra -->
       <a href="https://emerra.io" target="_blank" style="text-decoration:none;color:inherit;">
-      <div class="featured-card reveal">
+      <div class="featured-card reveal project-card" 
+           data-project-id="emerra"
+           data-title="Emerra.io"
+           data-category="Geospatial Platform"
+           data-tech='["React", "FastAPI", "GeoPandas", "Firebase", "Overpass API", "QGIS"]'
+           data-details="Infrastructure site suitability analysis for any asset class, powered by open data. Users define constraints, apply weighted scoring, and generate red flag reports — all through a browser-based map interface."
+           data-links='{"live": "https://emerra.io", "source": "#"}'>
         <div class="featured-info">
           <div class="project-type">Geospatial Platform</div>
           <div class="project-name" style="font-size:26px;">Emerra.io</div>
@@ -596,7 +602,13 @@
       </a>
 
       <!-- Multi-Agent Market Entry -->
-      <div class="project-card reveal">
+      <div class="project-card reveal"
+           data-project-id="market-entry"
+           data-title="Market Entry Analyst"
+           data-category="AI / Multi-Agent"
+           data-tech='["Claude API", "Multi-Agent", "Python", "HTML Reports"]'
+           data-details="A nine-agent system that produces branded market entry reports — covering power grid, land, regulatory, connectivity, climate risk, and competitive landscape analysis. Agents run concurrently and synthesise into a single HTML deliverable."
+           data-links='{"live": "#", "source": "#"}'>
         <div class="project-type">AI / Multi-Agent</div>
         <div class="project-name">Market Entry Analyst</div>
         <p class="project-desc">
@@ -613,7 +625,13 @@
       </div>
 
       <!-- Red Flag Report Generator -->
-      <div class="project-card reveal">
+      <div class="project-card reveal"
+           data-project-id="red-flag"
+           data-title="Red Flag Report Generator"
+           data-category="Geospatial Automation"
+           data-tech='["GeoPandas", "Shapely", "Overpass API", "PDF Output"]'
+           data-details="Automated constraint analysis for infrastructure sites. Queries OpenStreetMap, government spatial data, and flood/seismic layers to produce a structured risk assessment with maps and scoring."
+           data-links='{"live": "#", "source": "#"}'>
         <div class="project-type">Geospatial Automation</div>
         <div class="project-name">Red Flag Report Generator</div>
         <p class="project-desc">
@@ -630,7 +648,13 @@
       </div>
 
       <!-- PMO Automation -->
-      <div class="project-card reveal">
+      <div class="project-card reveal"
+           data-project-id="pmo-intel"
+           data-title="PMO Intelligence Suite"
+           data-category="Workflow Automation"
+           data-tech='["Smartsheet API", "Confluence", "Power Automate", "Python"]'
+           data-details="A Smartsheet-to-Confluence automation ecosystem — syncing project data, generating narrative status reports, managing access permissions via Power Automate, and feeding dashboards for executive visibility."
+           data-links='{"live": "#", "source": "#"}'>
         <div class="project-type">Workflow Automation</div>
         <div class="project-name">PMO Intelligence Suite</div>
         <p class="project-desc">
@@ -647,7 +671,13 @@
       </div>
 
       <!-- Whisper Transcription -->
-      <div class="project-card reveal">
+      <div class="project-card reveal"
+           data-project-id="whisper"
+           data-title="Whisper Transcription App"
+           data-category="Web Application"
+           data-tech='["Whisper API", "Cloud Run", "GitHub Pages"]'
+           data-details="Browser-based audio transcription tool using OpenAI Whisper API, with a static frontend on GitHub Pages and a serverless backend on Google Cloud Run."
+           data-links='{"live": "#", "source": "#"}'>
         <div class="project-type">Web Application</div>
         <div class="project-name">Whisper Transcription App</div>
         <p class="project-desc">
@@ -662,7 +692,13 @@
       </div>
 
       <!-- QGIS Testfit -->
-      <div class="project-card reveal">
+      <div class="project-card reveal"
+           data-project-id="qgis-testfit"
+           data-title="QGIS Testfit Tool"
+           data-category="Engineering Tool"
+           data-tech='["QGIS", "Python", "Spatial Analysis"]'
+           data-details="Data hall layout and capacity simulation within QGIS. Inputs land boundary and setback constraints, outputs building footprints, MW capacity estimates, and spatial feasibility assessments."
+           data-links='{"live": "#", "source": "#"}'>
         <div class="project-type">Engineering Tool</div>
         <div class="project-name">QGIS Testfit Tool</div>
         <p class="project-desc">
@@ -679,7 +715,13 @@
 
       <!-- Piano Quest -->
       <a href="Apps/PianoQuest/piano-quest.html" target="_blank" style="text-decoration:none;color:inherit;">
-      <div class="project-card reveal">
+      <div class="project-card reveal"
+           data-project-id="piano-quest"
+           data-title="Piano Quest"
+           data-category="Web Game"
+           data-tech='["React", "Game Design", "CSS Animation"]'
+           data-details="An RPG-style game that turns piano practice into a themed adventure. Players pick from five worlds, battle enemies by completing songs, and collect gear across a procedurally built quest map."
+           data-links='{"live": "Apps/PianoQuest/piano-quest.html", "source": "#"}'>
         <div class="project-type">Web Game</div>
         <div class="project-name">Piano Quest</div>
         <p class="project-desc">
@@ -839,6 +881,26 @@
     © 2026 Asvin Ang · Built with purpose, not templates.
   </div>
 </footer>
+
+<!-- ── MODAL ───────────────────────────────────── -->
+<div id="project-modal" style="display:none;">
+    <div class="modal-overlay"></div>
+    <div class="modal-content">
+        <button class="modal-close">×</button>
+        <div class="modal-grid">
+            <div class="modal-visual">
+                <div class="modal-image-placeholder"></div>
+            </div>
+            <div class="modal-info">
+                <div class="modal-label"></div>
+                <h2 class="modal-title"></h2>
+                <div class="modal-tech-tags"></div>
+                <p class="modal-description"></p>
+                <div class="modal-actions"></div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- ── SCROLL REVEAL ───────────────────────────── -->
 <script>
