@@ -396,10 +396,10 @@
     </p>
     
     <div class="contact-grid reveal">
-      <a href="mailto:asvin.ang@gmail.com" class="contact-card">
+      <a href="#" id="email-link" class="contact-card">
         <div class="contact-icon"><i data-lucide="mail"></i></div>
         <div class="contact-label">Email</div>
-        <div class="contact-value">asvin.ang@gmail.com</div>
+        <div class="contact-value" id="email-value">Click to reveal</div>
       </a>
       
       <a href="#" id="mobile-link" class="contact-card">
@@ -488,8 +488,8 @@
   const mobileLink = document.getElementById('mobile-link');
   const mobileValue = document.getElementById('mobile-value');
   const part1 = '+65';
-  const part2 = ' 8894';
-  const part3 = ' 5352';
+  const part2 = ' 8223';
+  const part3 = ' 5817';
 
   if (mobileLink) {
     mobileLink.addEventListener('click', (e) => {
@@ -497,6 +497,22 @@
       const fullNumber = part1 + part2 + part3;
       mobileValue.textContent = fullNumber;
       mobileLink.href = 'tel:' + fullNumber.replace(/\s/g, '');
+    });
+  }
+
+  // Email Reveal Logic (Anti-Spam)
+  const emailLink = document.getElementById('email-link');
+  const emailValue = document.getElementById('email-value');
+  const e1 = 'asvin';
+  const e2 = '.ang';
+  const e3 = '@gmail.com';
+
+  if (emailLink) {
+    emailLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const fullEmail = e1 + e2 + e3;
+      emailValue.textContent = fullEmail;
+      emailLink.href = 'mailto:' + fullEmail;
     });
   }
 
@@ -515,23 +531,36 @@
   const sections = document.querySelectorAll('div.hero, section');
   const navDots = document.querySelectorAll('.dot-nav .dot');
 
-  const dotObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const id = entry.target.getAttribute('id');
-        navDots.forEach(dot => {
-          dot.classList.remove('active');
-          if (dot.getAttribute('data-target') === id) {
-            dot.classList.add('active');
-          }
-        });
+  const updateActiveDot = () => {
+    let currentSectionId = '';
+    let minDistance = Infinity;
+
+    sections.forEach(section => {
+      const rect = section.getBoundingClientRect();
+      // We look for the section whose top is closest to the top of the viewport (or slightly above it)
+      const distance = Math.abs(rect.top);
+      
+      // If the section's top is within the top half of the screen, it's a strong candidate
+      if (rect.top < window.innerHeight / 2 && rect.bottom > 100) {
+        if (distance < minDistance) {
+          minDistance = distance;
+          currentSectionId = section.getAttribute('id');
+        }
       }
     });
-  }, { threshold: 0.3, rootMargin: '-10% 0px -40% 0px' });
 
-  sections.forEach(section => {
-    dotObserver.observe(section);
-  });
+    if (currentSectionId) {
+      navDots.forEach(dot => {
+        dot.classList.remove('active');
+        if (dot.getAttribute('data-target') === currentSectionId) {
+          dot.classList.add('active');
+        }
+      });
+    }
+  };
+
+  window.addEventListener('scroll', updateActiveDot);
+  updateActiveDot(); // Initial check
 
   // Project Modal Logic (FLIP)
   const modal = document.getElementById('project-modal');
