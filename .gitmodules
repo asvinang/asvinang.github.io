@@ -1,0 +1,3 @@
+[submodule "Tex"]
+	path = Tex
+	url = https://github.com/asvinang/cv-maker
