@@ -14,3 +14,8 @@ Tex/*.blg
 # Dated CV outputs (fixed-name PDFs are kept for the website)
 Tex/CV/Asvin_Ang_CV_*_20*.pdf
 docs/
+
+# IDE and Local AI tooling configurations
+.vscode/
+.claude/
+*.local.json
