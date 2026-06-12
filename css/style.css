@@ -210,13 +210,6 @@ section + section { border-top: 1px solid var(--rule-light); }
   position: relative;
   background: var(--card-bg);
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-  animation: pulse 4s ease-in-out infinite;
-}
-
-@keyframes pulse {
-  0% { border-color: rgba(230, 74, 25, 0.15); box-shadow: 0 0 15px rgba(230, 74, 25, 0.03); }
-  50% { border-color: rgba(230, 74, 25, 0.35); box-shadow: 0 0 25px rgba(230, 74, 25, 0.08); }
-  100% { border-color: rgba(230, 74, 25, 0.15); box-shadow: 0 0 15px rgba(230, 74, 25, 0.03); }
 }
 
 .project-card:not([data-links*='"live": "#"']):not([data-links*='"live": ""']) .glow-overlay {
@@ -503,9 +496,39 @@ section + section { border-top: 1px solid var(--rule-light); }
 footer {
   border-top: 1px solid var(--rule-light);
   padding: 24px 0;
-  text-align: center;
   font-size: 12px;
   color: var(--ink-faint);
+}
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.footer-link {
+  color: var(--ink-faint);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+.footer-link:hover {
+  color: var(--accent);
+}
+.visitor-counter {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--mono);
+}
+.counter-icon {
+  width: 14px;
+  height: 14px;
+  stroke-width: 2px;
 }
 
 /* ── FLOATING DOT NAVIGATION ──────────────────── */

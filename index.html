@@ -442,8 +442,14 @@
 
 <!-- ── FOOTER ──────────────────────────────────── -->
 <footer>
-  <div class="container">
-    © 2026 Asvin Ang · Built with purpose, not templates.
+  <div class="container footer-content">
+    <span>© 2026 Asvin Ang · Built with purpose, not templates.</span>
+    <div class="footer-links">
+      <a href="privacy.html" class="footer-link">Privacy Policy</a>
+      <span id="visitor-counter" class="visitor-counter" style="display: none;">
+        <i data-lucide="eye" class="counter-icon"></i> <span id="visitor-count">0</span> views
+      </span>
+    </div>
   </div>
 </footer>
 
@@ -492,12 +498,14 @@
   const part3 = ' 5817';
 
   if (mobileLink) {
-    mobileLink.addEventListener('click', (e) => {
+    const revealMobile = (e) => {
       e.preventDefault();
       const fullNumber = part1 + part2 + part3;
       mobileValue.textContent = fullNumber;
       mobileLink.href = 'tel:' + fullNumber.replace(/\s/g, '');
-    });
+      mobileLink.removeEventListener('click', revealMobile);
+    };
+    mobileLink.addEventListener('click', revealMobile);
   }
 
   // Email Reveal Logic (Anti-Spam)
@@ -508,12 +516,14 @@
   const e3 = '@gmail.com';
 
   if (emailLink) {
-    emailLink.addEventListener('click', (e) => {
+    const revealEmail = (e) => {
       e.preventDefault();
       const fullEmail = e1 + e2 + e3;
       emailValue.textContent = fullEmail;
       emailLink.href = 'mailto:' + fullEmail;
-    });
+      emailLink.removeEventListener('click', revealEmail);
+    };
+    emailLink.addEventListener('click', revealEmail);
   }
 
   // Interactive Glow Logic
@@ -537,10 +547,8 @@
 
     sections.forEach(section => {
       const rect = section.getBoundingClientRect();
-      // We look for the section whose top is closest to the top of the viewport (or slightly above it)
       const distance = Math.abs(rect.top);
       
-      // If the section's top is within the top half of the screen, it's a strong candidate
       if (rect.top < window.innerHeight / 2 && rect.bottom > 100) {
         if (distance < minDistance) {
           minDistance = distance;
@@ -560,11 +568,17 @@
   };
 
   window.addEventListener('scroll', updateActiveDot);
-  updateActiveDot(); // Initial check
+  updateActiveDot();
 
-  // Project Modal Logic (FLIP)
+  // Project Modal Logic (FLIP & Accessibility)
   const modal = document.getElementById('project-modal');
   let lastFocusedElement = null;
+
+  const getFocusableElements = (container) => {
+    return Array.from(container.querySelectorAll(
+      'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+    )).filter(el => !el.hasAttribute('disabled') && el.getAttribute('tabindex') !== '-1');
+  };
 
   if (modal) {
     const modalContent = modal.querySelector('.modal-content');
@@ -580,22 +594,26 @@
       lastFocusedElement = card;
       const first = card.getBoundingClientRect();
 
+      // Set aria-hidden on other body children for screen readers
+      Array.from(document.body.children).forEach(child => {
+        if (child !== modal) {
+          child.setAttribute('aria-hidden', 'true');
+        }
+      });
+
       // Populate Visual Area
       const modalVisual = modal.querySelector('.modal-visual');
       const cardImageWrapper = card.querySelector('.project-image');
       
-      modalVisual.innerHTML = ''; // Clear previous
+      modalVisual.innerHTML = '';
       
       if (cardImageWrapper) {
-        // Clone the inner content (img or svg)
         const content = cardImageWrapper.cloneNode(true);
-        // Style the clone to fit the modal
         content.style.width = '100%';
         content.style.height = '100%';
         content.style.margin = '0';
         content.style.borderBottom = 'none';
         
-        // If it's an image, ensure it covers the height
         const img = content.querySelector('img');
         if (img) {
           img.style.objectFit = 'cover';
@@ -604,11 +622,10 @@
         
         modalVisual.appendChild(content);
       } else {
-        // Fallback to placeholder
         modalVisual.innerHTML = '<div class="modal-image-placeholder"></div>';
       }
 
-      // Populate data from attributes
+      // Populate data
       modalLabel.textContent = card.dataset.category || '';
       modalTitle.textContent = card.dataset.title || '';
       modalDescription.textContent = card.dataset.details || '';
@@ -651,7 +668,6 @@
       modal.style.display = 'flex';
       const last = modalContent.getBoundingClientRect();
 
-      // Invert
       const deltaX = first.left - last.left;
       const deltaY = first.top - last.top;
       const deltaW = first.width / last.width;
@@ -663,10 +679,8 @@
       modalOverlay.style.transition = 'none';
       modalOverlay.style.opacity = '0';
 
-      // Force reflow
-      modalContent.offsetHeight;
+      modalContent.offsetHeight; // force reflow
 
-      // Play
       requestAnimationFrame(() => {
         modal.classList.add('active');
         modalContent.style.transition = ''; 
@@ -682,10 +696,18 @@
     const closeModal = () => {
       modal.classList.remove('active');
       document.body.style.overflow = '';
+      
+      // Remove aria-hidden from other body elements
+      Array.from(document.body.children).forEach(child => {
+        if (child !== modal) {
+          child.removeAttribute('aria-hidden');
+        }
+      });
+
       setTimeout(() => {
         if (!modal.classList.contains('active')) {
           modal.style.display = 'none';
-          modalContent.style.transform = ''; // Reset
+          modalContent.style.transform = '';
           if (lastFocusedElement) lastFocusedElement.focus();
         }
       }, 400);
@@ -693,14 +715,12 @@
 
     document.querySelectorAll('.project-card').forEach(card => {
       card.addEventListener('click', (e) => {
-        // Prevent navigation if the card is wrapped in a link
         const link = card.closest('a');
         if (link) {
           e.preventDefault();
         }
         openModal(card);
       });
-      // Make cards focusable for keyboard navigation
       card.setAttribute('tabindex', '0');
       card.addEventListener('keydown', (e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -712,9 +732,51 @@
 
     modalClose.addEventListener('click', closeModal);
     modalOverlay.addEventListener('click', closeModal);
+    
     window.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.classList.contains('active')) closeModal();
+      if (modal.classList.contains('active')) {
+        if (e.key === 'Escape') {
+          closeModal();
+        } else if (e.key === 'Tab') {
+          const focusables = getFocusableElements(modal);
+          if (focusables.length === 0) return;
+          const first = focusables[0];
+          const last = focusables[focusables.length - 1];
+          if (e.shiftKey) {
+            if (document.activeElement === first) {
+              last.focus();
+              e.preventDefault();
+            }
+          } else {
+            if (document.activeElement === last) {
+              first.focus();
+              e.preventDefault();
+            }
+          }
+        }
+      }
     });
+  }
+
+  // Visitor Counter Fetch (Abacus API)
+  const visitorCountEl = document.getElementById('visitor-count');
+  const visitorCounterEl = document.getElementById('visitor-counter');
+
+  if (visitorCountEl && visitorCounterEl) {
+    fetch('https://abacus.jasoncameron.dev/hit/asvinang.github.io/home')
+      .then(response => {
+        if (!response.ok) throw new Error('Counter response not OK');
+        return response.json();
+      })
+      .then(data => {
+        if (data && typeof data.value === 'number') {
+          visitorCountEl.textContent = data.value.toLocaleString();
+          visitorCounterEl.style.display = 'inline-flex';
+        }
+      })
+      .catch(error => {
+        console.error('Visitor counter error:', error);
+      });
   }
 </script>
 
